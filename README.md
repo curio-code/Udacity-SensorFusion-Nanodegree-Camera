@@ -12,11 +12,14 @@ This project has four major parts:
 
 ## Detecting Keypoints and extacting Descriptors
 * For keypoints detection following have been implemented in ```matching2D_Student.cpp```
-  "HARRIS", "SHITOMASI",  "FAST", "BRISK","ORB", "AKAZE"
-* While for decriptors: "SIFT",BRISK", "BRIEF", "ORB", "FREAK"
-* For matching BruteForce and FLANN has been implemented. And to reduce false positives (FP) choice of two approches are implemented: Nearest neighbor and Kth-Nearest neighbor
+  *HARRIS*, *SHITOMASI*, *FAST*, *BRISK*, *ORB*, *AKAZE*
+* While for decriptors: *SIFT*, *BRISK*, *BRIEF*, *ORB*, *FREAK*
+* For matching *BruteForce* and *FLANN* has been implemented. And to reduce false positives (FP) choice of two approches are implemented: *Nearest neighbor(NN)* and *Kth-Nearest neighbor(KNN)*
 
 ![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/ptsMatch.jpg)
+
+## Projection of 3D LiDAR point cloud on 2D Image Plane
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/eq_Lidar-cam.png)
 
 ## Dependencies
 * cmake >= 2.8
