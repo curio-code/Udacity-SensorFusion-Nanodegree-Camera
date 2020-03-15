@@ -11,14 +11,16 @@ This project has four major parts:
 4. And lastly, conducting various tests with the framework. Goal here is to identify the most suitable detector/descriptor combination for TTC estimation and also to search for problems that can lead to faulty measurements by the camera or Lidar sensor.
 
 ## Detecting Keypoints and extacting Descriptors
-For keypoints detection following have been implemented in ```matching2D_Student.cpp```
+* For keypoints detection following have been implemented in ```matching2D_Student.cpp```
   "HARRIS", "SHITOMASI",  "FAST", "BRISK","ORB", "AKAZE"
-While for decriptors: "SIFT",BRISK", "BRIEF", "ORB", "FREAK"
-For matching BruteForce and FLANN has been implemented. And to reduce false positives (FP) choice of two approches are implemented: Nearest neighbor and Kth-Nearest neighbor
+
+* While for decriptors: "SIFT",BRISK", "BRIEF", "ORB", "FREAK"
+
+* For matching BruteForce and FLANN has been implemented. And to reduce false positives (FP) choice of two approches are implemented: Nearest neighbor and Kth-Nearest neighbor
 
 ![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/ptsMatch.jpg)
 
-## Dependencies for Running Locally
+## Dependencies
 * cmake >= 2.8
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
