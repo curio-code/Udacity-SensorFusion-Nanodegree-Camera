@@ -48,8 +48,18 @@ struct BoundingBox { // bounding box around a classified object (contains both 2
 ```
 ![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/LidarBBox.png)
 
-## TTC using Camera
+## Estimating TTC using Camera
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/TTC_Cam_3.jpg)
 
+In (a), a set of keypoints has been detected and the relative distances between keypoints 1-7 have been computed. In (b), 4 keypoints have been matched between successive images (with keypoint 3 being a mismatch) using descriptors. The ratio of all relative distances between each other can be used to compute a reliable TTC estimate.
+
+## Estimating TTC using LiDAR
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/TTC_Lid_1.png)
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/TTC_Lid_2.png)
+Here, constant velocity model is assumed for the target vehicle
+
+# Final OUTPUT
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/Result.png)
 
 
 ## Dependencies
