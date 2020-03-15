@@ -75,9 +75,9 @@ int main(int argc, const char *argv[])
     bool bVis = false;            // visualize results
 
     // for saving the performance of different combination of detector and descriptor
+    ofstream dataCollection;
     bool saveData = false;
     if (saveData){
-        ofstream dataCollection;
         dataCollection.open ("Report.csv");
         dataCollection << "DetectorType, DescriptorType, ImgNumber, TTC_Lidar, TTC_Camera"  << endl;
     }
@@ -168,20 +168,17 @@ int main(int argc, const char *argv[])
         vector<cv::KeyPoint> keypoints; // create empty feature list for current image
         //string detectorType = "SHITOMASI";
 
-        if (detectorType.compare("SHITOMASI") == 0)
-        {
+        if (detectorType.compare("SHITOMASI") == 0){
             detKeypointsShiTomasi(keypoints, imgGray, false);
         }
-        else if (detectorType.compare("HARRIS") == 0)
-        {
+        else if (detectorType.compare("HARRIS") == 0){
             detKeypointsHarris(keypoints, imgGray, false);
         }
-      	else
-        {
+      	else{
         	detKeypointsModern(keypoints, imgGray, detectorType, false);
         }
 
-        // optional : limit number of keypoints (helpful for debugging and learning)
+        // limit number of keypoints (helpful for debugging and learning)
         bool bLimitKpts = false;
         if (bLimitKpts)
         {
@@ -235,11 +232,10 @@ int main(int argc, const char *argv[])
 
             /* TRACK 3D OBJECT BOUNDING BOXES */
 
-            //// STUDENT ASSIGNMENT
-            //// TASK FP.1 -> match list of 3D objects (vector<BoundingBox>) between current and previous frame (implement ->matchBoundingBoxes)
+            //// Match list of 3D objects (vector<BoundingBox>) between current and previous frame (implement ->matchBoundingBoxes)
             map<int, int> bbBestMatches;
             matchBoundingBoxes(matches, bbBestMatches, *(dataBuffer.end()-2), *(dataBuffer.end()-1)); // associate bounding boxes between current and previous frame using keypoint matches
-            //// EOF STUDENT ASSIGNMENT
+
 
             // store matches in current data frame
             (dataBuffer.end()-1)->bbMatches = bbBestMatches;
@@ -273,22 +269,20 @@ int main(int argc, const char *argv[])
                 // compute TTC for current match
                 if( currBB->lidarPoints.size()>0 && prevBB->lidarPoints.size()>0 ) // only compute TTC if we have Lidar points
                 {
-                    //// STUDENT ASSIGNMENT
-                    //// TASK FP.2 -> compute time-to-collision based on Lidar data (implement -> computeTTCLidar)
+                    // Computation of TTC based on Lidar data
                     double ttcLidar;
                     computeTTCLidar(prevBB->lidarPoints, currBB->lidarPoints, sensorFrameRate, ttcLidar);
-                    //// EOF STUDENT ASSIGNMENT
 
-                    //// STUDENT ASSIGNMENT
-                    //// TASK FP.3 -> assign enclosed keypoint matches to bounding box (implement -> clusterKptMatchesWithROI)
-                    //// TASK FP.4 -> compute time-to-collision based on camera (implement -> computeTTCCamera)
+                    // Computation of TTC based on Camera Data
                     double ttcCamera;
                     clusterKptMatchesWithROI(*currBB, (dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints, (dataBuffer.end() - 1)->kptMatches);
                     computeTTCCamera((dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints, currBB->kptMatches, sensorFrameRate, ttcCamera);
-                    //// EOF STUDENT ASSIGNMENT
+
                     if (saveData){
                         dataCollection << ttcLidar << ", " << ttcCamera;
                     }
+
+                    // For visualization turn bVis 'true'
                     bVis = false;
                     if (bVis)
                     {
@@ -314,10 +308,8 @@ int main(int argc, const char *argv[])
         }
 	dataCollection << endl;
     } // eof loop over all images
-    dataCollection << endl;
 	dataBuffer.clear();
       }
     }
-  	dataCollection << endl;
     return 0;
 }
