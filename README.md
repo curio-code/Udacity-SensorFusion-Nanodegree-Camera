@@ -4,6 +4,8 @@
 
 ![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/codeFlow.png)
 
+This sensor fusion framework is example of low level fusion.
+
 This project has four major parts: 
 1. First, matching 3D objects over time by using keypoint correspondences. 
 2. Second, computing the TTC based on Lidar measurements. 
