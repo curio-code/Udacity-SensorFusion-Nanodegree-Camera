@@ -21,6 +21,37 @@ This project has four major parts:
 ## Projection of 3D LiDAR point cloud on 2D Image Plane
 ![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/eq_Lidar-cam.png)
 
+Here, ```P ``` is a point in 3D plane which is projected on to the image plane by multiplying with *intrinsic* and *extrinsic* matrices, ``` P' ``` is the 2D projection of ```P```.
+
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/Cam-LidarProj.png)
+
+## Object Detection with YOLO
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/yolo.png)
+
+## Creating 3D objects
+Now as we have bounding boxs from Yolo and we can find the 2D projected LiDAR points enclosed by it we can reverse and the equaations  discussed above and cluster 3D Lidar points. But for this we need to define a new ```struct``` so as to keep LiDAR point, keypoints and descriptor associated with bounding boxes together.
+
+```
+struct BoundingBox { // bounding box around a classified object (contains both 2D and 3D data)
+
+    int boxID; // unique identifier for this bounding box
+    int trackID; // unique identifier for the track to which this bounding box belongs
+
+    cv::Rect roi; // 2D region-of-interest in image coordinates
+    int classID; // ID based on class file provided to YOLO framework
+    double confidence; // classification trust
+
+    std::vector<LidarPoint> lidarPoints; // Lidar 3D points which project into 2D image roi
+    std::vector<cv::KeyPoint> keypoints; // keypoints enclosed by 2D roi
+    std::vector<cv::DMatch> kptMatches; // keypoint matches enclosed by 2D roi
+};
+```
+![alt text](https://github.com/curio-code/Udacity-SensorFusion-Nanodegree-Camera/blob/master/images/LidarBBox.png)
+
+## TTC using Camera
+
+
+
 ## Dependencies
 * cmake >= 2.8
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
