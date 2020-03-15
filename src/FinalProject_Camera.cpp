@@ -283,7 +283,7 @@ int main(int argc, const char *argv[])
                     }
 
                     // For visualization turn bVis 'true'
-                    bVis = false;
+                    bVis = true;
                     if (bVis)
                     {
                         cv::Mat visImg = (dataBuffer.end() - 1)->cameraImg.clone();
